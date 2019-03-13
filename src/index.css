@@ -1,3 +1,22 @@
+:root {
+  --bodybgcolor: aliceblue;
+  --mainheadercolor: rgb(218, 242, 250);
+  --mainfontscolor: rgb(1, 1, 122); 
+  --mainlist: none;
+  --mainLink: rgba(247, 231, 197, 0.747);
+  --lightBlue: rgba(68, 189, 230, 0.87);
+  --mainvapbgcolor: rgba(151, 184, 185, 0.747); 
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--bodybgcolor);
+}
+
 body {
   margin: 0;
   padding: 0;
