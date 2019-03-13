@@ -11,6 +11,7 @@ create-react-app react-firebase-authentication
 npm install react-router-dom
 npm install --save styled-components
 npm install firebase
+npm install recompose
 ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
