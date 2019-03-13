@@ -4,6 +4,8 @@
 
 ## Lesson
 
+[complete-firebase-authentication-react-tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial)
+
 ```BASH
 create-react-app react-firebase-authentication
 npm install react-router-dom

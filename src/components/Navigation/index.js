@@ -8,23 +8,32 @@ const Navigation = () => (
   <Nav>
     <ul>
       <Li>
-        <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+        <StyledLink to={ROUTES.SIGN_IN}>Sign In</StyledLink>
       </Li>
       <Li>
-        <Link to={ROUTES.LANDING}>Landing</Link>
+        <StyledLink to={ROUTES.LANDING}>Landing</StyledLink>
       </Li>
       <Li>
-        <Link to={ROUTES.HOME}>Home</Link>
+        <StyledLink to={ROUTES.HOME}>Home</StyledLink>
       </Li>
       <Li>
-        <Link to={ROUTES.ACCOUNT}>Account</Link>
+        <StyledLink to={ROUTES.ACCOUNT}>Account</StyledLink>
       </Li>
       <Li>
-        <Link to={ROUTES.ADMIN}>Admin</Link>
+        <StyledLink to={ROUTES.ADMIN}>Admin</StyledLink>
       </Li>
     </ul>
   </Nav>
 );
+
+const StyledLink = styled(Link)`
+  color: var(--mainfontscolor);
+  font-weight: bold;
+  transition: all 1s ease-in-out;
+  &:hover {
+    color: red;
+  }  
+`;
 
 const Nav = styled.nav`
   padding: 1rem 0.8rem;
@@ -32,7 +41,6 @@ const Nav = styled.nav`
   color: var(--mainfontscolor);
   background-color: var(--mainheadercolor);
   ul {
-    list-style-type: none;
     list-style: none;
     display: flex;
     align-items: center;
@@ -49,18 +57,8 @@ const Li = styled.li`
   transition: all 1s ease-in-out;
   &:hover {
     background-color: var(--mainLink);
-    color: var(--mainvapbgcolor);
     border: 2px solid var(--bodybgcolor);
   }
-  &:focus {
-    outline: none;
-  }
-  ${props => 
-    props.primary &&
-    css`
-      background: palevioletred;
-      color: white;
-    `};
 `
 
 export default Navigation;
