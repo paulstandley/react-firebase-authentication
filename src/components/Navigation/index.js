@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-
 import * as ROUTES from '../../constants/routes';
+import SignOutButton from '../SignOut';
 
 const Navigation = () => (
   <Nav>
@@ -21,6 +21,9 @@ const Navigation = () => (
       </Li>
       <Li>
         <StyledLink to={ROUTES.ADMIN}>Admin</StyledLink>
+      </Li>
+      <Li>
+        <SignOutButton />
       </Li>
     </ul>
   </Nav>

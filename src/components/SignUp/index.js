@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const SignUpPage = () => (
   <Main>
     <header>
-      <h1>SignUp</h1>
+      <h1>Sign Up</h1>
     </header>
     <FirebaseContext.Consumer>
       {firebase => <SignUpForm firebase={firebase} />}
