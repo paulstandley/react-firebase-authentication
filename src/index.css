@@ -3,9 +3,10 @@
   --mainheadercolor: rgb(218, 242, 250);
   --mainfontscolor: rgb(1, 1, 122); 
   --mainlist: none;
-  --mainLink: rgba(247, 231, 197, 0.747);
+  --mainLink: rgba(196, 218, 238, 0.747);
   --lightBlue: rgba(68, 189, 230, 0.87);
-  --mainvapbgcolor: rgba(151, 184, 185, 0.747); 
+  --mainvapbgcolor: rgba(151, 184, 185, 0.747);
+  --mainformbgcolor: rgb(228, 194, 199); 
 }
 
 * {
