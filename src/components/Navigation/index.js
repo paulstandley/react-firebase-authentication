@@ -3,30 +3,43 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import * as ROUTES from '../../constants/routes';
 import SignOutButton from '../SignOut';
+import { AuthUserContext } from '../Session';
 
 const Navigation = () => (
   <Nav>
-    <ul>
-      <Li>
-        <StyledLink to={ROUTES.SIGN_IN}>Sign In</StyledLink>
-      </Li>
-      <Li>
-        <StyledLink to={ROUTES.LANDING}>Landing</StyledLink>
-      </Li>
-      <Li>
-        <StyledLink to={ROUTES.HOME}>Home</StyledLink>
-      </Li>
-      <Li>
-        <StyledLink to={ROUTES.ACCOUNT}>Account</StyledLink>
-      </Li>
-      <Li>
-        <StyledLink to={ROUTES.ADMIN}>Admin</StyledLink>
-      </Li>
-      <Li>
-        <SignOutButton />
-      </Li>
-    </ul>
+    <AuthUserContext.Consumer>
+      {authUser =>
+        authUser ? <NavigationAuth /> : <NavigationNonAuth />
+      }
+    </AuthUserContext.Consumer>
   </Nav>
+);
+const NavigationAuth = () => (
+  <ul>
+    <Li>
+      <StyledLink to={ROUTES.LANDING}>Landing</StyledLink>
+    </Li>
+    <Li>
+      <StyledLink to={ROUTES.HOME}>Home</StyledLink>
+    </Li>
+    <Li>
+      <StyledLink to={ROUTES.ACCOUNT}>Account</StyledLink>
+    </Li>
+    <Li>
+      <SignOutButton />
+    </Li>
+  </ul>
+);
+
+const NavigationNonAuth = () => (
+  <ul>
+    <Li>
+      <StyledLink to={ROUTES.LANDING}>Landing</StyledLink>
+    </Li>
+    <Li>
+      <StyledLink to={ROUTES.SIGN_IN}>Sign In</StyledLink>
+    </Li>
+  </ul>
 );
 
 const StyledLink = styled(Link)`
