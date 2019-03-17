@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+
 import { withFirebase } from '../Firebase';
-import styled from 'styled-components';
 
 const INITIAL_STATE = {
   passwordOne: '',
@@ -41,55 +41,29 @@ class PasswordChangeForm extends Component {
       passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-      <Section>
-        <form onSubmit={this.onSubmit}>
-          <input
-            name="passwordOne"
-            value={passwordOne}
-            onChange={this.onChange}
-            type="password"
-            placeholder="New Password"
-          />
-          <input
-            name="passwordTwo"
-            value={passwordTwo}
-            onChange={this.onChange}
-            type="password"
-            placeholder="Confirm New Password"
-          />
-          <button disabled={isInvalid} type="submit">
-            Reset My Password
-          </button>
-          {error && <p>{error.message}</p>}
-        </form>
-      </Section>
+      <form onSubmit={this.onSubmit}>
+        <input
+          name="passwordOne"
+          value={passwordOne}
+          onChange={this.onChange}
+          type="password"
+          placeholder="New Password"
+        />
+        <input
+          name="passwordTwo"
+          value={passwordTwo}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Confirm New Password"
+        />
+        <button disabled={isInvalid} type="submit">
+          Reset My Password
+        </button>
+
+        {error && <p>{error.message}</p>}
+      </form>
     );
   }
 }
-
-const Section = styled.section`
-  background-color: var(--bodybgcolor);
-  padding: 6rem 0.2rem;
-  form {
-    padding: 4rem 0.6rem;
-    background: var(--bodybgcolor);
-    border: 2px solid var(--mainfontscolor);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-     input, button {
-      background: var(--mainlink);
-      border: 2px solid var(--mainfontscolor);
-      color: var(--lightblue);
-      font-size: 1.2rem;
-      padding: 1rem;
-      &:hover {
-        transition: all 1s ease-in-out;
-        background-color: var(--mainheadercolor);
-        border: 2px solid var(--mainfontscolor);
-      }
-    }
-  }
-`;
 
 export default withFirebase(PasswordChangeForm);

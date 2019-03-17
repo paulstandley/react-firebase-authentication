@@ -2,7 +2,7 @@ import React from 'react';
 
 const Landing = () => (
   <div>
-    <h2>Landing</h2>
+    <h1>Landing</h1>
   </div>
 );
 

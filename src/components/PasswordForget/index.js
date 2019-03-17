@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import styled from 'styled-components';
 
 const PasswordForgetPage = () => (
-  <Main>
-    <header>
-      <h1>PasswordForget</h1>
-    </header>
+  <div>
+    <h1>PasswordForget</h1>
     <PasswordForgetForm />
-  </Main>
+  </div>
 );
 
 const INITIAL_STATE = {
@@ -50,7 +48,6 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-    <Section>  
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -65,7 +62,6 @@ class PasswordForgetFormBase extends Component {
 
         {error && <p>{error.message}</p>}
       </form>
-    </Section>  
     );
   }
 }
@@ -75,43 +71,6 @@ const PasswordForgetLink = () => (
     <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
   </p>
 );
-
-const Main = styled.main`
-  width: 100vw;
-  text-align: center;
-  background-color: var(--bodybgcolor);
-  header {
-    padding: 1rem;
-    h1 {
-      color: var(--mainfontscolor);
-    }
-  }
-`;
-
-const Section = styled.section`
-  background-color: var(--bodybgcolor);
-  padding: 6rem 0.2rem;
-  form {
-    padding: 4rem 0.6rem;
-    background: var(--bodybgcolor);
-    border: 2px solid var(--mainfontscolor);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-     input, button {
-      background: var(--mainlink);
-      border: 2px solid var(--mainfontscolor);
-      color: var(--lightblue);
-      font-size: 1.2rem;
-      padding: 1rem;
-      &:hover {
-        transition: all 1s ease-in-out;
-        background-color: var(--mainheadercolor);
-        border: 2px solid var(--mainfontscolor);
-      }
-    }
-  }
-`;
 
 export default PasswordForgetPage;
 

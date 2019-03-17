@@ -1,78 +1,28 @@
-import React, { Component } from 'react';
-import { withFirebase } from '../Firebase';
-import styled from 'styled-components';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { compose } from 'recompose';
 
-class AdminPage extends Component {
-  constructor(props) {
-    super(props);
+import { withAuthorization, withEmailVerification } from '../Session';
+import { UserList, UserItem } from '../Users';
+import * as ROLES from '../../constants/roles';
+import * as ROUTES from '../../constants/routes';
 
-    this.state = {
-      loading: false,
-      users: [],
-    };
-  }
+const AdminPage = () => (
+  <div>
+    <h1>Admin</h1>
+    <p>The Admin Page is accessible by every signed in admin user.</p>
 
-  componentDidMount() {
-    this.setState({ loading: true });
-    this.props.firebase.users().on('value', snapshot => {
-      const usersObject = snapshot.val();
-      const usersList = Object.keys(usersObject).map(key => ({
-        ...usersObject[key],
-        uid: key,
-      }));
-      this.setState({
-        users: usersList,
-        loading: false,
-      });
-    });
-  }
-
-  componentWillUnmount() {
-    this.props.firebase.users().off();
-  }
-
-  render() {
-    const { users, loading } = this.state;
-    return (
-      <Main>
-        <header>
-          <h1>Admin</h1>
-        </header>
-        {loading && <div>Loading ...</div>}
-        <UserList users={users} />
-      </Main>
-    );
-  }
-}
-
-const UserList = ({ users }) => (
-  <ul>
-    {users.map(user => (
-      <li key={user.uid}>
-        <span>
-          <strong>ID:</strong> {user.uid}
-        </span>
-        <span>
-          <strong>E-Mail:</strong> {user.email}
-        </span>
-        <span>
-          <strong>Username:</strong> {user.username}
-        </span>
-      </li>
-    ))}
-  </ul>
+    <Switch>
+      <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
+      <Route exact path={ROUTES.ADMIN} component={UserList} />
+    </Switch>
+  </div>
 );
 
-const Main = styled.main`
-  width: 100vw;
-  text-align: center;
-  background-color: var(--bodybgcolor);
-  header {
-    padding: 1rem;
-    h1 {
-      color: var(--mainfontscolor);
-    }
-  }
-`;
+const condition = authUser =>
+  authUser && authUser.roles.includes(ROLES.ADMIN);
 
-export default withFirebase(AdminPage);
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(AdminPage);

@@ -1,32 +1,47 @@
-import React from 'react';
-import { withAuthorization } from '../Session';
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import { compose } from 'recompose';
 
-const HomePage = () => (
-  <Main>
-    <header>
-      <h1>Home Page</h1>
-    </header>
-    <p>The Home Page is accessible by every signed in user</p>
-  </Main>
-);
+import { withAuthorization, withEmailVerification } from '../Session';
+import { withFirebase } from '../Firebase';
+import Messages from '../Messages';
+
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      users: null,
+    };
+  }
+
+  componentDidMount() {
+    this.props.firebase.users().on('value', snapshot => {
+      this.setState({
+        users: snapshot.val(),
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.firebase.users().off();
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Home Page</h1>
+        <p>The Home Page is accessible by every signed in user.</p>
+
+        <Messages users={this.state.users} />
+      </div>
+    );
+  }
+}
 
 const condition = authUser => !!authUser;
 
-const Main = styled.main`
-  width: 100vw;
-  text-align: center;
-  background-color: var(--bodybgcolor);
-  header {
-    padding: 1rem;
-    h1 {
-      color: var(--mainfontscolor);
-    }
-  }
-  p {
-    color: var(--mainfontscolor);
-    font-size: 1.4rem;
-  }
-`;
-
-export default withAuthorization(condition)(HomePage)
+export default compose(
+  withFirebase,
+  withEmailVerification,
+  withAuthorization(condition),
+)(HomePage);
