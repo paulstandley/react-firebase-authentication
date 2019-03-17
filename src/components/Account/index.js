@@ -10,7 +10,7 @@ const AccountPage = () => (
     {authUser => (
       <Main>
         <header>
-          <h1>Account: {authUser.email}</h1>
+          <h1>Account: {authUser ? authUser.email : ' '}</h1>
         </header>
         <PasswordForgetForm />
         <PasswordChangeForm />

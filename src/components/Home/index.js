@@ -22,9 +22,10 @@ const Main = styled.main`
     h1 {
       color: var(--mainfontscolor);
     }
-    p {
-      color: var(--mainfontscolor);
-    }
+  }
+  p {
+    color: var(--mainfontscolor);
+    font-size: 1.4rem;
   }
 `;
 
