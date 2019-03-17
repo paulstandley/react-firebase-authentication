@@ -1,13 +1,31 @@
 import React from 'react';
-import  { FirebaseContext } from '../Firebase';
+import { withAuthorization } from '../Session';
+import styled from 'styled-components';
 
-const Home = () => (
-  <FirebaseContext.Consumer>
-    {firebase => {
-      console.log(firebase.auth.currentUser)
-      return <div>I've access to Firebase and render something like {firebase.auth.currentUser !== null ? firebase.auth.currentUser.email : ' no email yet'}.</div>;
-    }}
-  </FirebaseContext.Consumer>
+const HomePage = () => (
+  <Main>
+    <header>
+      <h1>Home Page</h1>
+    </header>
+    <p>The Home Page is accessible by every signed in user</p>
+  </Main>
 );
 
-export default Home;
+const condition = authUser => !!authUser;
+
+const Main = styled.main`
+  width: 100vw;
+  text-align: center;
+  background-color: var(--bodybgcolor);
+  header {
+    padding: 1rem;
+    h1 {
+      color: var(--mainfontscolor);
+    }
+    p {
+      color: var(--mainfontscolor);
+    }
+  }
+`;
+
+export default withAuthorization(condition)(HomePage)

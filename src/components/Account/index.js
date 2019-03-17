@@ -1,16 +1,22 @@
 import React from 'react';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
+import { AuthUserContext } from '../Session';
+import { withAuthorization } from '../Session';
 import styled from 'styled-components';
 
 const AccountPage = () => (
-  <Main>
-    <header>
-      <h1>Account Page</h1>
-    </header>
-    <PasswordForgetForm />
-    <PasswordChangeForm />
-  </Main>
+  <AuthUserContext.Consumer>
+    {authUser => (
+      <Main>
+        <header>
+          <h1>Account: {authUser.email}</h1>
+        </header>
+        <PasswordForgetForm />
+        <PasswordChangeForm />
+      </Main>
+    )}
+  </AuthUserContext.Consumer>
 );
 
 const Main = styled.main`
@@ -25,4 +31,6 @@ const Main = styled.main`
   }
 `;
 
-export default AccountPage;
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)(AccountPage)
